@@ -1,0 +1,1 @@
+# spec-coding-mcp
