@@ -23,4 +23,4 @@ jobs:
       - name: Push NuGet package
         working-directory: src/SpecCodingMcpServer
         run: |
-          dotnet nuget push **/*.nupkg --skip-duplicate --source "nuget.org" --api-key ${{ secrets.NUGET_KEY }} || true
+          dotnet nuget push **/*.nupkg --skip-duplicate dotnet nuget push bin/Release/*.nupkg --api-key <your-api-key> --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_KEY }} || true
