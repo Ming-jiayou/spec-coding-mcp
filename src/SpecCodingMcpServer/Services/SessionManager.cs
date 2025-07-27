@@ -51,16 +51,16 @@ namespace SpecCodingMcpServer.Services
     {
         // Configuration settings for the session manager
         private readonly SpecCodingConfiguration _specCodingConfiguration;
-        
+
         // In-memory storage for active sessions
         private readonly Dictionary<string, SessionState> _sessions;
-        
+
         // Logger for diagnostic and error messages
         private readonly ILogger<SessionManager> _logger;
-        
+
         // Timeout duration for session expiration
         private readonly TimeSpan _sessionTimeout;
-        
+
         // Timer for periodic cleanup of expired sessions
         private readonly Timer _cleanupTimer;
 
@@ -71,7 +71,7 @@ namespace SpecCodingMcpServer.Services
         /// <param name="logger">The logger instance for diagnostic messages.</param>
         public SessionManager(ILogger<SessionManager> logger)
         {
-           _specCodingConfiguration = new SpecCodingConfiguration();
+            _specCodingConfiguration = new SpecCodingConfiguration();
             _sessions = new Dictionary<string, SessionState>();
             _logger = logger;
 

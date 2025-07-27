@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ModelContextProtocol.Server;
+using Serilog;
 using SpecCodingMcpServer.Exceptions;
 using SpecCodingMcpServer.Models;
 using SpecCodingMcpServer.Services;
@@ -53,7 +54,6 @@ public class FeatureConfirmedTool
     {
         Log.Information($"Feature confirmed for session {sessionId} with feature: {featureName}");
 
-        // 验证会话存在并更新状态
         var sessionState = _sessionManager.GetSession(sessionId);
         if (sessionState == null)
         {
@@ -63,7 +63,7 @@ public class FeatureConfirmedTool
         sessionState.CurrentStage = WorkflowStage.RequirementsGathering;
         sessionState.UpdatedAt = DateTime.UtcNow;
         _sessionManager.UpdateSession(sessionId, sessionState);
-         
+
 
         var template = await _contextManager.LoadPromptAsync("FeatureConfirmed.md");
         var result = _contextManager.GetPrompt(template, new Dictionary<string, object>

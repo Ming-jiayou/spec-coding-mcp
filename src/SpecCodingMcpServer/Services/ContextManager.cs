@@ -52,7 +52,7 @@ namespace SpecCodingMcpServer.Services
         public ContextManager(IFileService fileService, ILogger<ContextManager> logger)
         {
             _fileService = fileService;
-           _specCodingConfiguration = new SpecCodingConfiguration();
+            _specCodingConfiguration = new SpecCodingConfiguration();
             _logger = logger;
             _templateCache = new Dictionary<string, string>();
         }

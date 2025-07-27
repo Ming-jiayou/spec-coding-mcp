@@ -21,14 +21,14 @@ public class TasksStartTool
         ISessionManager sessionManager,
         IFileService fileService,
                 IContextManager contextManager,
-         
+
         ILogger<FeatureConfirmedTool> logger)
     {
         _sessionManager = sessionManager;
         _fileService = fileService;
-       _specCodingConfiguration = new SpecCodingConfiguration();
-        _logger= logger;
-        _contextManager=contextManager;
+        _specCodingConfiguration = new SpecCodingConfiguration();
+        _logger = logger;
+        _contextManager = contextManager;
     }
 
     [McpServerTool]

@@ -22,7 +22,7 @@ namespace SpecCodingMcpServer.Exceptions
         /// Initializes a new instance of the SessionNotFoundException class with the specified session ID.
         /// </summary>
         /// <param name="sessionId">The ID of the session that was not found.</param>
-        public SessionNotFoundException(string sessionId) 
+        public SessionNotFoundException(string sessionId)
             : base($"Session not found: {sessionId}")
         {
             SessionId = sessionId;
@@ -34,7 +34,7 @@ namespace SpecCodingMcpServer.Exceptions
         /// </summary>
         /// <param name="sessionId">The ID of the session that was not found.</param>
         /// <param name="message">The custom error message that describes the exception.</param>
-        public SessionNotFoundException(string sessionId, string message) 
+        public SessionNotFoundException(string sessionId, string message)
             : base(message)
         {
             SessionId = sessionId;
@@ -47,7 +47,7 @@ namespace SpecCodingMcpServer.Exceptions
         /// <param name="sessionId">The ID of the session that was not found.</param>
         /// <param name="message">The custom error message that describes the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
-        public SessionNotFoundException(string sessionId, string message, Exception innerException) 
+        public SessionNotFoundException(string sessionId, string message, Exception innerException)
             : base(message, innerException)
         {
             SessionId = sessionId;

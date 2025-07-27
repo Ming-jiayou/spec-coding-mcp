@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace SpecCodingMcpServer.Tools;
 
-public class RequirementsConfirmedTool 
+public class RequirementsConfirmedTool
 {
     private readonly ISessionManager _sessionManager;
     private readonly IFileService _fileService;
@@ -22,17 +22,17 @@ public class RequirementsConfirmedTool
         ISessionManager sessionManager,
         IFileService fileService,
                 IContextManager contextManager,
-         
+
         ILogger<FeatureConfirmedTool> logger)
     {
         _sessionManager = sessionManager;
         _fileService = fileService;
-       _specCodingConfiguration = new SpecCodingConfiguration();
-        _logger= logger;
-        _contextManager=contextManager;
+        _specCodingConfiguration = new SpecCodingConfiguration();
+        _logger = logger;
+        _contextManager = contextManager;
     }
-     
-     
+
+
     [McpServerTool]
     [Description("Confirm the completion of the requirements document and proceed to the design phase")]
     public async Task<string> SpecCodingRequirementsConfirmed(
@@ -41,11 +41,11 @@ public class RequirementsConfirmedTool
     {
         try
         {
-            
 
-            Log.Information($"Requirements confirmed for session {sessionId} {featureName}" );
 
- 
+            Log.Information($"Requirements confirmed for session {sessionId} {featureName}");
+
+
             var sessionState = _sessionManager.GetSession(sessionId);
             if (sessionState == null)
             {
@@ -55,8 +55,8 @@ public class RequirementsConfirmedTool
             if (sessionState.CurrentStage != WorkflowStage.RequirementsGathering)
             {
                 throw new WorkflowException(WorkflowStage.RequirementsGathering.ToString(), sessionId);
-            } 
-             
+            }
+
             sessionState.CurrentStage = WorkflowStage.CreateFeatureDesignDocument;
             sessionState.UpdatedAt = DateTime.UtcNow;
             _sessionManager.UpdateSession(sessionId, sessionState);
@@ -75,5 +75,5 @@ public class RequirementsConfirmedTool
             Log.Fatal(ex, "Error executing requirements confirmation");
             throw new InvalidOperationException("Error executing requirements confirmation", ex);
         }
-    } 
+    }
 }

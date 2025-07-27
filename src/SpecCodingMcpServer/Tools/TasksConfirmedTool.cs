@@ -22,14 +22,14 @@ public class TasksConfirmedTool
         ISessionManager sessionManager,
         IFileService fileService,
                 IContextManager contextManager,
-         
+
         ILogger<FeatureConfirmedTool> logger)
     {
         _sessionManager = sessionManager;
         _fileService = fileService;
-       _specCodingConfiguration = new SpecCodingConfiguration();
-        _logger= logger;
-        _contextManager=contextManager;
+        _specCodingConfiguration = new SpecCodingConfiguration();
+        _logger = logger;
+        _contextManager = contextManager;
     }
 
 
@@ -75,5 +75,5 @@ public class TasksConfirmedTool
             Log.Fatal(ex, "Error executing tasks confirmation");
             throw new InvalidOperationException("Error executing tasks confirmation", ex);
         }
-    } 
+    }
 }

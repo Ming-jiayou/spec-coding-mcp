@@ -14,17 +14,17 @@ namespace SpecCodingMcpServer.Tools;
 /// MCP tool for starting the SpecCoding workflow.
 /// Initializes a new session and returns the feature definition prompt.
 /// </summary>
-public class WorkflowStartTool 
+public class WorkflowStartTool
 {
     // Configuration settings for output paths and operational parameters
     private readonly SpecCodingConfiguration _specCodingConfiguration;
-    
+
     // Service for managing session state and lifecycle
     private readonly ISessionManager _sessionManager;
-    
+
     // Service for loading and processing prompt templates
     private readonly IContextManager _contextManager;
-    
+
     // Logger for diagnostic and error messages
     private readonly ILogger<WorkflowStartTool> _logger;
 
@@ -68,19 +68,19 @@ public class WorkflowStartTool
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
-            
+
             // Store the session state for tracking
             _sessionManager.UpdateSession(sessionId, sessionState);
 
             // Load the feature definition prompt template
             var template = await _contextManager.LoadPromptAsync("FeatureDefine.md");
-            
+
             // Process template with session-specific variables
             var result = _contextManager.GetPrompt(template, new Dictionary<string, object>
             {
-                { "session_id", sessionId }, 
+                { "session_id", sessionId },
                 { "features_folder", $"{_specCodingConfiguration.OutputPath}/features" }
-            }); 
+            });
 
             return result;
         }

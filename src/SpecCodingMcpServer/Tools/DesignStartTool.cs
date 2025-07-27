@@ -69,7 +69,7 @@ public class DesignStartTool
 
             // Load the design document creation prompt
             var template = await _contextManager.LoadPromptAsync("CreateFeatureDesignDocument.md");
-            
+
             // Process template with feature-specific context
             var result = _contextManager.GetPrompt(template, new Dictionary<string, object>
             {

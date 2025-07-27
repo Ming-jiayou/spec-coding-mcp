@@ -26,7 +26,7 @@ public class SpecCodingConfiguration
     /// </summary>
     [Required]
     public string OutputPath { get; set; } = ".spec-coding";
-    
+
     /// <summary>
     /// Gets or sets the timeout duration for inactive sessions.
     /// Sessions that exceed this timeout without activity will be automatically cleaned up.
@@ -41,8 +41,8 @@ public class SpecCodingConfiguration
     /// <returns>The absolute path to the prompts directory.</returns>
     public string GetAbsolutePromptsPath()
     {
-        return Path.IsPathRooted(PromptsPath) 
-            ? PromptsPath 
+        return Path.IsPathRooted(PromptsPath)
+            ? PromptsPath
             : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PromptsPath);
     }
 }

@@ -50,7 +50,8 @@ public class RequirementsStartTool
         [Description("Session Id")] string sessionId,
         [Description("Feature Name based on the confirmed feature")] string featureName)
     {
-       try{
+        try
+        {
             Log.Information($"Starting requirements gathering for session  {sessionId}  {featureName}");
 
             var sessionState = _sessionManager.GetSession(sessionId);
@@ -59,10 +60,10 @@ public class RequirementsStartTool
                 throw new SessionNotFoundException(sessionId);
             }
 
-        if (sessionState.CurrentStage != WorkflowStage.RequirementsGathering)
-        {
-            throw new WorkflowException(WorkflowStage.RequirementsGathering.ToString(), sessionId);
-        }
+            if (sessionState.CurrentStage != WorkflowStage.RequirementsGathering)
+            {
+                throw new WorkflowException(WorkflowStage.RequirementsGathering.ToString(), sessionId);
+            }
 
             var template = await _contextManager.LoadPromptAsync("RequirementsGathering.md");
             var result = _contextManager.GetPrompt(template, new Dictionary<string, object>
@@ -70,7 +71,7 @@ public class RequirementsStartTool
                 { "session_id", sessionState.SessionId },
                 { "feature_name", sessionState.FeatureName },
                 { "feature_folder", $"{_specCodingConfiguration.OutputPath}/features/{featureName}" }
-            }); 
+            });
             return result;
         }
         catch (Exception ex)

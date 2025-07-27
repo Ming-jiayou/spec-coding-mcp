@@ -62,5 +62,5 @@ try
 // This ensures the server exits gracefully with proper error logging
 catch (Exception ex)
 {
-    Log.Fatal(ex,"Error");
+    Log.Fatal(ex, "Error");
 }

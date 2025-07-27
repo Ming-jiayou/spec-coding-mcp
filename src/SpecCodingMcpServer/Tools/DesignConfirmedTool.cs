@@ -18,16 +18,16 @@ public class DesignConfirmedTool
 {
     // Service for managing session state and validation
     private readonly ISessionManager _sessionManager;
-    
+
     // Service for file operations (unused in this tool but injected)
     private readonly IFileService _fileService;
-    
+
     // Configuration settings for output paths
     private readonly SpecCodingConfiguration _specCodingConfiguration;
-    
+
     // Logger for diagnostic and error messages
     private readonly ILogger<FeatureConfirmedTool> _logger;
-    
+
     // Service for loading and processing prompt templates
     private readonly IContextManager _contextManager;
 
@@ -89,7 +89,7 @@ public class DesignConfirmedTool
 
             // Load the task creation prompt template
             var template = await _contextManager.LoadPromptAsync("FeatureDesignDocumentConfirmed.md");
-            
+
             // Process template with session context
             var result = _contextManager.GetPrompt(template, new Dictionary<string, object>
             {
@@ -105,5 +105,5 @@ public class DesignConfirmedTool
             throw new InvalidOperationException("Error executing requirements confirmation", ex);
         }
     }
-     
+
 }
