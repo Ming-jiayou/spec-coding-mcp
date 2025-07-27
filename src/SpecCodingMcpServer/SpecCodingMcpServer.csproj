@@ -12,7 +12,7 @@
     <PackageType>McpServer</PackageType>
 
     <!-- Set recommended package metadata -->
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile>../../README.md</PackageReadmeFile>
     <PackageId>SpecCodingMcpServer</PackageId>
     <PackageVersion>0.1.0</PackageVersion>
     <PackageTags>AI; MCP; server; stdio; SPEC; Vibe Coding</PackageTags>
