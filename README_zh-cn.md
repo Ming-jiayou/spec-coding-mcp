@@ -2,146 +2,70 @@
 
 通过系统化的**规格驱动开发**，将功能想法转化为可投入生产的代码
 
-## 🎯 规格驱动开发工作流程
+## 什么是规格驱动开发？
 
-### 阶段 1：功能定义
+**规格驱动开发（Spec-Driven Development）**，简单来说，就是在软件开发过程中，以明确、详细的规格说明作为整个开发流程的核心驱动力。这里的规格说明，涵盖了软件系统的功能需求、性能指标、接口定义、数据格式等各个方面，它就像是建筑施工中的蓝图，为开发者们清晰地描绘出软件最终要达成的样子。
 
-- 通过与用户交互了解功能细节
+规格驱动开发的核心，是通过标准化的规格文件将模糊需求转化为可执行、可跟踪、可验收的开发流程。本质是把传统软件工程的严谨性融入 AI 编程，让开发从 “凭感觉” 的 “氛围编程”（Vibe Coding）变成 “可把控” 的工程化过程。
 
-### 阶段 2：需求收集
+规格驱动开发的关键是 “Spec 文件夹”—— 每个功能模块对应一个 Spec 文件夹，包含 3 个核心文件，通过结构化文档将需求、设计、任务 “落地”：
+- 1.**requirements.md**（需求文档）—— 用**EARS 语法**（简易需求语法）编写用户故事和验收标准，避免模糊表达。
 
-- 使用 EARS 格式将功能想法转化为正式需求
+- 2.**design.md**（技术方案）—— 包含架构设计、流程逻辑、技术选型、潜在风险等细节。
 
-### 阶段 3：设计文档
+- 3.**tasks.md**（任务清单）—— 将技术方案拆分为**可执行的具体任务**（todolist）
 
-- 根据确认的需求设计技术架构
+## 使用 spec-coding-mcp 实现规格驱动开发
 
-### 阶段 4：任务规划
+>`spec-coding-mcp`中的 MCP，即 Model Context Protocol（模型上下文协议），是连接外部工具与 AI IDE 的重要桥梁。只要你的 AI IDE 能够使用 MCP，就可以使用`spec-coding-mcp`。
 
-- 将设计分解为独立的、可执行的编码任务
+这里仅以 `GitHub Copilot` 为例，介绍如何使用 `spec-coding-mcp`
 
-### 阶段 5：任务执行
+###  1. 配置 Vs Code
 
-- 按照计划实现代码
+要让 GitHub Copilot 与 Spec-Coding-MCP 协同工作，需先在相关配置文件中设置 MCP 服务器信息。
+
+访问 NuGet.org，搜索 `SpecCodingMcpServer`，可以看到“MCP Server” 选项卡：
+
+![nuget.png](./docs/images/nuget.png)
+
+在 Vs Code 的工作区中添加一个 `.vscode/mcp.json` 文件, 将“MCP Server” 选项卡中的 json 复制进去保存。然后点击上面的`start`：
+
+![start-mcp.png](./docs/images/start-mcp.png)
 
 
-## 🚀 快速开始
-### 配置 MCP 服务器
+`SpecCodingMcpServer`需要`.NET 10`才能运行，请先确保你的本地安装了 .NET 10(https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 
-#### 使用代码方式
+![dnx.png](./docs/images/dnx.png)
 
-`
-{
-  "servers": {
-    "SpecCodingMcpServer": {
-      "type": "stdio",
-      "command": "<SpecCodingMcpServer.exe 目录路径>",
-      "args": []
-    }
-  }
-}
-`
+###  2. 启动规格驱动开发流程
 
-#### 使用可执行文件方式
-`
-{
-  "servers": {
-    "SpecCodingMcpServer": {
-      "type": "stdio",
-      "command": "dotnet",
-      "args": [
-        "run",
-        "--project",
-        "<spec-coding-mcp\src\SpecCodingMcpServer 目录路径>"
-      ]
-    }
-  }
-}
-`
+- 1.**功能定义**：向 GitHub Copilot 发出 “开始规格编码” 的指令，随后明确具体功能，比如 “创建一个 Vue 待办应用”，并补充相关细节，确认后进入下一步。
 
-#### 使用 NuGet 方式
+![spec-coding-1-1.png](./docs/images/spec-coding-1-1.png)
 
-- 访问 `NuGet.org` 并按 mcpserver 包类型筛选
+![spec-coding-1-2.png](./docs/images/spec-coding-1-2.png)
 
-- 搜索 `SpecCodingMcpServer` 并从 “MCP Server” 选项卡复制配置
+![spec-coding-1-3.png](./docs/images/spec-coding-1-3.png)
 
-### 启动工作流程
+- 2.**需求收集**：Copilot 会启动需求收集阶段，生成符合 EARS 格式 的需求文档，确认需求无误后进入设计阶段。
 
-以下是使用**规格驱动开发**工作流程的完整示例：
+![spec-coding-2-1.png](./docs/images/spec-coding-2-1.png)
 
-#### 1. 功能定义
-`
-我：开始规格编码
+- 3.**设计文档**：基于已确认的需求，Copilot 会生成全面的技术架构设计文档，确认设计没问题后进入任务规划。
 
-AI：[调用 SpecCodingMcpServer/spec_coding_workflow_start]
-欢迎来到规格编码！让我们从定义你的功能开始。
+![spec-coding-3-1.png](./docs/images/spec-coding-3-1.png)
 
-我：创建一个 Vue 待办应用
+- 4.**任务规划**：Copilot 将设计和需求分解为可执行的任务列表，最终会生成包含 requirements.md、design.md 和 tasks.md 的完整 Spec 文件夹结构。
 
-AI：为了确保我们构建出完全符合你需求的产品，我需要再明确一些细节
+![spec-folders.png](./docs/images/spec-folders.png)
 
-我：[输入关于该功能的更多细节]
+- 5.**任务执行**：确认任务规划后就进入具体的执行阶段。Copilot 会逐一执行任务，直到完成开发。
 
-AI：这样看起来可以继续了吗？请用“是”确认
+![spec-coding-5-1.png](./docs/images/spec-coding-5-1.png)
 
-我：是
+![spec-coding-5-2.png](./docs/images/spec-coding-5-2.png)
 
-AI：[调用 SpecCodingMcpServer/spec_coding_feature_confirmed]
-[按照规格编码工作流程的要求创建功能文档目录和 README 文件]
-`
+![spec-coding-5-3.png](./docs/images/spec-coding-5-3.png)
 
-#### 2. 需求收集
-
-`
-AI：开始 Vue 待办应用的需求收集阶段
-[调用 SpecCodingMcpServer/spec_coding_requirements_start]
-[创建具有详细 EARS 格式需求的 Vue 待办应用需求文档]
-这些需求看起来可以吗？如果可以，我们可以进入设计阶段。
-
-我：是
-
-AI：[调用 SpecCodingMcpServer/spec_coding_requirements_confirmed]
-`
-
-#### 3. 设计文档
-
-`
-AI：开始 Vue 待办应用的设计阶段
-[调用 SpecCodingMcpServer/spec_coding_design_start]
-[根据需求创建 Vue 待办应用的全面设计文档]
-这个设计看起来可以吗？如果可以，我们可以进入实施计划阶段。
-
-我：是
-
-AI：[调用 SpecCodingMcpServer/spec_coding_design_confirmed]
-`
-
-#### 4. 任务规划
-
-`
-AI：开始 Vue 待办应用实施的任务创建阶段
-[调用 SpecCodingMcpServer/spec_coding_tasks_start]
-[根据设计和需求创建实现 Vue 待办应用的全面任务列表]
-这些任务看起来可以吗？请查看任务列表，在我们进入实施阶段之前，如果你需要任何调整，请告诉我。
-
-用户：是
-
-AI：[调用 SpecCodingMcpServer/spec_coding_tasks_confirmed]
-`
-
-#### 5. 任务执行
-
-`
-AI：开始 Vue 待办应用的实际实施阶段
-[调用 SpecCodingMcpServer/spec_coding_execute_start]
-[逐一执行任务]
-`
-
-#### 最终生成的文件夹结构
-`
-.spec-coding/features/vue-todo-app/
-├── requirements.md   # EARS 格式的需求
-├── README.md         # 功能描述
-├── design.md         # 技术架构
-└── tasks.md          # 实施清单
-`
+![spec-coding-5-4.png](./docs/images/spec-coding-5-4.png)
