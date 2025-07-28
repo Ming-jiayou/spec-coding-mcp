@@ -30,7 +30,7 @@ Transform feature ideas into production-ready code through systematic **Spec-Dri
 
 ### Config MCP Server
 
-#### Using code
+#### Using exe
 
 ```json
 {
@@ -44,7 +44,7 @@ Transform feature ideas into production-ready code through systematic **Spec-Dri
 }
 ```
 
-#### Using exe
+#### Using code
 
 ```json
 {
